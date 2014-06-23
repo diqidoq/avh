@@ -11,9 +11,11 @@ This small set of bash functions is intended to become a little Linux bash comma
 
 ## How to
 
-Move the script file into your (home/user/bin/...) and rename `avh.sh` to `avh` 
+Move the script file into your (home/user/bin/...) and rename `avh.sh` to `avh` or use terminal command:
 
     mv avh.sh ~/bin/avh
+
+Make sure that `~/bin/avh` is executable (permissions) and `~/bin` is accessable (permissions) and recorgnized by your terminal. If not, sometimes it helps to relog in to Linux user. 
 
 AVH supports actions based on simple parameter flags, like `avh -a` or `avh -l`
 
@@ -38,5 +40,8 @@ In the moment the script assumes that you are running a Debian-based Linux machi
 Don't assume the script ready for guaranteed usability. This is an early attempt and will get some love from time to time.
 
 
+---
 
+AVH is published under the [GNU General Public License v3](http://www.gnu.org/copyleft/gpl.html).
+AVH is made for Linux Apache2 development tasks and sponsored by [MAROQQO | digital media](http://www.maroqqo.com). Join us @ [twitter](http://twitter.com/maroqqo)
 

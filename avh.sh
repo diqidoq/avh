@@ -2,6 +2,7 @@
 #
 # 2012 (c) diqidoq, for MAROQQO digital media
 #
+# beta 0.2 
 
 err(){
 cat << EOF

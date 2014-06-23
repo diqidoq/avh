@@ -11,11 +11,21 @@ This small set of bash functions is intended to become a little Linux bash comma
 
 ## How to
 
+### Install version 1:
+
 Move the script file into your (home/user/bin/...) and rename `avh.sh` to `avh` or use terminal command:
 
     mv avh.sh ~/bin/avh
 
 Make sure that `~/bin/avh` is executable (permissions) and `~/bin` is accessable (permissions) and recorgnized by your terminal. If not, sometimes it helps to relog in to Linux user. 
+
+### Install version 2:
+
+Use the install.sh snippet to let it check if ~/bin folder already exist and to create it if not. It will aloso set the right permissions and will copy avh.sh to ~/bin/avh and will make it executable. Simply run the following command from terminal in the avh download folder root:
+
+    sh install.sh
+
+### Using AVH:
 
 AVH supports actions based on simple parameter flags, like `avh -a` or `avh -l`
 

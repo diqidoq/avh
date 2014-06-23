@@ -3,7 +3,7 @@
 # 2012 (c) diqidoq, for MAROQQO digital media
 #
 
-tD=~/bin2
+tD=~/bin
 
 installAVH(){
   sudo cp avh.sh "${tD}"/avh

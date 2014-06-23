@@ -1,78 +1,61 @@
 #!/bin/bash
 #
-# Copyright 2012: Digidog (aka. Sebastian Ugowsky) for MAROQQO digital media
+# 2012 (c) diqidoq, for MAROQQO digital media
 #
 
- err(){
-  echo
-  echo "#######################################################"
-  echo "#   AVH - Apache virtual host helper message:         #"
-  echo "#   Error: No correct second argument supplied.       #"
-  echo "#   Which list to show? Which conf to edit?           #"
-  echo "#   Run avh --help to get more info/help about avh.   #"
-  echo "#                               --Thanks (@Digidog)   #"
-  echo "#######################################################"
-  echo
- }
- help(){
-  echo
-  echo "+--------------------------------------------------------------+"
-  echo "|            AVH - Apache virtual hosting helper               |"
-  echo "|            ###################################               |"
-  echo "|                                                              |"
-  echo "| avh is little apache2 virtual host domain helper (@Digidog)  |"
-  echo "| ===========================================================  |"
-  echo "|                                                              |"
-  echo "| Put AVH in ~/ & add alias avh='bash .avh.sh' to ~/.bashrc    |"
-  echo "| AVH supports actions based on flags, like avh -a or avh -h   |"
-  echo "|                                                              |"
-  echo "| type avh -a : to list all available vhost conf files in path |"
-  echo "| type avh -n : to list all enabled vhosts in enabled path     |"
-  echo "| type avh -e : to edit a new or existing conf file            |"
-  echo "| type avh -d : duplicate an available vhost conf file in path |"
-  echo "| type avh -h : to append a local address to /etc/hosts file   |"
-  echo "| type avh -x : to remove a local address from /etc/hosts file |"
-  echo "| type avh -r : to restart Apache2 server                      |"
-  echo "|                                                              |"
-  echo "| flags -e, -h and -d require a second parameter (name)        |"
-  echo "|                                                              |"
-  echo "| ! HINT: !                                                    |"
-  echo "| Run avh -a before -e -h -d to get name completion support    |"
-  echo "+--------------------------------------------------------------+"
-  echo
+err(){
+cat << EOF
+
+-----------------------------------------------------
+Ups! ... Something missing here ? 
+How to use avh (link): https://github.com/diqidoq/avh
+-----------------------------------------------------
+
+EOF
  }
 
-case "$1" in
-  -a)
-      cd /etc/apache2/sites-available && ls -ash
+if [[ "$1" =~ "-" ]] ; then
+
+avaDir="/etc/apache2/sites-available";
+avnDir="/etc/apache2/sites-enabled";
+
+while getopts ":ane:d:l:xr" OPTION ; do
+
+case $OPTION in
+  a)
+      cd ${avaDir}
+      for file in * ; do 
+	fname=$(basename "$file")
+	echo "${avaDir}/$fname"
+      done
       ;;
-  -n)
-      cd /etc/apache2/sites-enabled && ls -ash
+  n)
+      cd ${avnDir}
+      for file in * ; do 
+	fname=$(basename "$file")
+	echo "${avnDir}/$fname"
+      done
       ;;
-  -e)
-      if [ -z "$2" ]
+  e)
+      if [ -z "$OPTARG" ]
         then
           err
       else
-          sudo vim /etc/apache2/sites-available/"$2"
+          sudo vim ${avaDir}/"$OPTARG"
       fi
       ;;
-  -r)
-      sudo service apache2 restart
-      ;;
-  -d)
-      if [ -z "$2" ]
+  d)
+      if [ -z "$OPTARG" ]
         then
           err
        else
-          ORG="$2"
           echo "New filename: "
           read FILENAME
-          sudo cp /etc/apache2/sites-available/$ORG /etc/apache2/sites-available/"$FILENAME"
+          sudo cp ${avaDir}/$OPTARG ${avaDir}/"$FILENAME"
       fi
       ;;
-  -h)
-      if [ -z "$2" ]
+  l)
+      if [ -z "$OPTARG" ]
         then
           echo "    No host name given to append to /etc/hosts."
           echo "    Do you want to edit /etc/hosts manually using vim? <y/n>: "
@@ -83,13 +66,14 @@ case "$1" in
               err
           fi
       else
-          sudo bash -c "echo 127.0.0.1 $2 >> /etc/hosts"
+          sudo bash -c "echo 127.0.0.1 $OPTARG >> /etc/hosts"
           # % echo "$2" | sudo tee -a /etc/hosts
           # sudo echo "$2" >> /etc/hosts
+          echo "$OPTARG added to /etc/hosts file. If you haven't added option -r, run avh -r to restart Apache."
       fi
       ;;
-   -x)
-      if [ -z "$2" ]
+   x)
+      if [ -z "$OPTARG" ]
         then
           echo "    No host name given to exclude from /etc/hosts."
           echo "    Do you want to edit /etc/hosts manually using vim? <y/n>: "
@@ -100,10 +84,26 @@ case "$1" in
               err
           fi
       else
-          sudo bash -c "sed -i -e '/$2/d' /etc/hosts"
+          sudo bash -c "sed -i -e '/$OPTARG/d' /etc/hosts"
       fi
       ;;
-   0) help ;;
---help) help ;;
-   *) err ;;
+  r)
+      sudo service apache2 restart
+      ;;
+  \?) 
+      err
+      exit 1
+      ;;
+  :) 
+      err
+      exit 1
+      ;;
 esac
+done
+
+else
+
+err
+exit 1
+
+fi

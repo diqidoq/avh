@@ -9,27 +9,30 @@ AVHhelp(){
 cat << EOF
 AVH - Apache virtual host helper
 ================================
-AVH supports actions based on simple options, like `avh -a` or `avh -l`
+AVH supports actions based on simple -options, like `avh -a` or `avh -l`
 
-    'avh -a'   list all virtual host conf files available
-    'avh -n'   list all virtual host conf files enabled
-    'avh -e'   edit a new or existing conf file
-    'avh -d'   duplicate a virtual host conf file available
-    'avh -i'   list all ip 127.0.0.1 entries from etc/hosts file
-    'avh -l'   append a local address to /etc/hosts file
-    'avh -x'   remove a local address from /etc/hosts file
-    'avh -r'   restart Apache2 server
+    'avh -a'         list all virtual host conf files available (use this first)
+    'avh -n'         list all virtual host conf files enabled
+    'avh -e'         edit a new or existing conf file
+    'avh -d'         duplicate a virtual host conf file available
+    'avh -i'         list all ip 127.0.0.1 entries from etc/hosts file
+    'avh -l'         append a local address to /etc/hosts file
+    'avh -x'         remove a local address from /etc/hosts file
+    'avh -r'         restart Apache2 server
+    'avh -h' or
+    'avh --help'     for help page (this)
+    'avh -v' or
+    'avh --version'  for showing version number and where installed
 
     flags -e, -l and -d require second parameter (variable|path|name)
 
-Run `avh -a` before `avh -e` or `avh -l` or `avh -d` to be in place and get command completion support.
 EOF
 }
 
 AVHerr(){
 cat << EOF
 -------------------------------------------------------
-| Ups! ... Something (arguments?) missing here ?      |
+| Ups! ... Something missing here ? Options ?         |
 | How to use avh: avh --help  or visit GitHub README: |
 | (link): https://github.com/diqidoq/avh              |
 -------------------------------------------------------
@@ -132,6 +135,7 @@ while test $# -gt 0 ; do
       AVHerr
       ;;
   -*)
+  # let's make options make easier to use, type -anr instead of -a -n -r
       split=$1
       shift
       set -- $(echo "$split" | cut -c 2- | sed 's/./-& /g') "$@"

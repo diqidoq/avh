@@ -17,7 +17,7 @@ Move the `avh.sh` script file out of yor downloaded zip into your `~/bin` (home/
 
     mv avh.sh ~/bin/avh
 
-Make sure that `~/bin/avh` is executable (permissions) and `~/bin` is accessable (permissions) and recorgnized by your terminal. If not, sometimes it helps to relog in to Linux user. 
+Make sure that `~/bin/avh` is executable (permissions) and `~/bin` is accessable (permissions) and recorgnized by your terminal. If not, sometimes it helps to relog in to Linux user.
 
 ### Install version 2:
 
@@ -27,19 +27,22 @@ Use the install.sh snippet to let it check if `~/bin` folder already exist and l
 
 ### Using AVH:
 
-AVH supports actions based on simple parameter flags, like `avh -a` or `avh -l`
+AVH supports actions based on simple -options, like `avh -a` or `avh -l`
 
-    type avh -a : to list all available vhost conf files in path
-    type avh -n : to list all enabled vhosts in enabled path
-    type avh -e : to edit a new or existing conf file
-    type avh -d : duplicate an available vhost conf file in path
-    type avh -l : to append a local address to /etc/hosts file
-    type avh -x : to remove a local address from /etc/hosts file
-    type avh -r : to restart Apache2 server
+    'avh -a'         list all virtual host conf files available (use this first)
+    'avh -n'         list all virtual host conf files enabled
+    'avh -e'         edit a new or existing conf file
+    'avh -d'         duplicate a virtual host conf file available
+    'avh -i'         list all ip 127.0.0.1 entries from etc/hosts file
+    'avh -l'         append a local address to /etc/hosts file
+    'avh -x'         remove a local address from /etc/hosts file
+    'avh -r'         restart Apache2 server
+    'avh -h' or
+    'avh --help'     for help page (this)
+    'avh -v' or
+    'avh --version'  for showing version number and where installed
 
     flags -e, -l and -d require second parameter (variable|path|name)
-
-Run `avh -a` before `avh -e` or `avh -l` or `avh -d` to be in place and get command completion support.
 
 ## Dependencies
 

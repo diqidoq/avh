@@ -7,13 +7,13 @@ AVH - Apache virtual host helper
 
 ## Description
 
-This small set of bash functions is intended to become a little Linux bash command line helper script for adding and removing virtual hosts and web project directories with a bunch of small and good ETR (easy to remember) terminal commands to run local domains on local development machines.
+This small set of bash functions is intended to become **a little Linux bash command line helper script for adding and removing virtual hosts and web project directory rootings** with a bunch of small and good ETR (easy to remember) terminal commands to run local domains on local development machines.
 
 ## How to
 
 ### Install version 1:
 
-Move the script file into your (home/user/bin/...) and rename `avh.sh` to `avh` or use terminal command:
+Move the `avh.sh` script file out of yor downloaded zip into your `~/bin` (home/user/bin/...) and rename `avh.sh` to `avh` or use terminal the following terminal command in **avh download folder root** to achieve this, if bin folder already exist:
 
     mv avh.sh ~/bin/avh
 
@@ -21,7 +21,7 @@ Make sure that `~/bin/avh` is executable (permissions) and `~/bin` is accessable
 
 ### Install version 2:
 
-Use the install.sh snippet to let it check if ~/bin folder already exist and to create it if not. It will aloso set the right permissions and will copy avh.sh to ~/bin/avh and will make it executable. Simply run the following command from terminal in the avh download folder root:
+Use the install.sh snippet to let it check if `~/bin` folder already exist and let it create it if not. It will also set the right permissions and will copy `avh.sh` to `~/bin/avh` and will make it executable. Simply run the following command from terminal in the **avh download folder root**:
 
     sh install.sh
 
@@ -43,7 +43,7 @@ Run `avh -a` before `avh -e` or `avh -l` or `avh -d` to be in place and get comm
 
 ## Dependencies
 
-In the moment the script assumes that you are running a Debian-based Linux machine (like Ubuntu) with Apache 2 web server set up and located virtual host files under /etc/apache2/ (typically) and your command line tool is fine with bash scripts and you have [vim](http://www.vim.org/) terminal editor already installed. If not: `sudo apt-get install vim`.
+In the moment the script assumes that you are running a **Debian-based Linux machine (like Ubuntu)** with **Apache 2** web server set up and located virtual host files under `/etc/apache2/` (typically) and your command line tool is fine with bash scripts and you have [vim](http://www.vim.org/) terminal editor already installed. If not: `sudo apt-get install vim`.
 
 ---
 
